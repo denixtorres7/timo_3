@@ -715,9 +715,13 @@ if (btnEscanear) {
       arScene.style.visibility = "visible";
       arScene.style.opacity = "1";
 
-      if (typeof arScene.play === "function") {
-        arScene.play();
-      }
+      arScene.removeAttribute("paused");
+
+      setTimeout(() => {
+        if (typeof arScene.play === "function") {
+          arScene.play();
+        }
+      }, 300);
     }
   });
 }
@@ -830,9 +834,6 @@ if (arScene) {
   arScene.style.display = "none";
   arScene.style.visibility = "hidden";
   arScene.style.opacity = "0";
-
-  if (typeof arScene.pause === "function") {
-    arScene.pause();
   }
 }
 
