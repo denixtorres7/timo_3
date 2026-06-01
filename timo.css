@@ -71,3 +71,26 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:Ari
   42%{transform:translate(-50%,-50%) translateY(7vh) scale(1.12);}
   100%{transform:translate(-50%,-50%) translateY(0) scale(1);}
 }
+
+body.modo-scan #app {
+  display: none !important;
+}
+
+body.modo-scan #pantallaInicio {
+  display: none !important;
+}
+
+body.modo-scan a-scene {
+  display: block !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
+}
+
+body.escena-activa a-scene {
+  display: none !important;
+}
+
+body.escena-activa #app {
+  display: block !important;
+}
