@@ -771,16 +771,14 @@ if (escenaQR && escenasValidas.includes(escenaQR)) {
 
 }
 else if (modoAR) {
-
   escenaEntradaQR = "scan";
-
   document.body.classList.add("modo-scan");
+  document.body.classList.remove("escena-activa");
 
   $("pantallaInicio").style.display = "none";
-
   app.style.display = "none";
-
 }
+
 else {
 
   const arScene = document.querySelector("a-scene");
@@ -824,7 +822,7 @@ window.addEventListener("DOMContentLoaded", () => {
       escenaEntradaQR = "scan";
 
       document.body.classList.remove("modo-scan");
-document.body.classList.add("escena-activa");
+      document.body.classList.add("escena-activa");
 
 const arScene = document.querySelector("a-scene");
 
