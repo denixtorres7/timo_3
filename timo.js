@@ -696,33 +696,19 @@ pelota.addEventListener("pointerdown", e => { e.stopPropagation(); if(!sonidoAct
 document.querySelectorAll("#menu [data-scene]").forEach(btn => btn.addEventListener("click", e => { e.stopPropagation(); if(!sonidoActivo) encenderSonido(); cargarEscena(btn.dataset.scene); }));
 btnSonido.addEventListener("click", e => { e.stopPropagation(); sonidoActivo ? apagarSonido() : encenderSonido(); });
 btnSensible.addEventListener("click", e => { e.stopPropagation(); modoSensible=!modoSensible; app.classList.toggle("modoSensible",modoSensible); btnSensible.classList.toggle("activo",modoSensible); actualizarAudioPorEscena(); });
-$("btnEntrarPortada").addEventListener("click", () => { $("pantallaInicio").style.display="none"; escenaEntradaQR=null; cargarEscena("portada"); });
 
-/* INICIO POR QR / URL */
-/* INICIO HÍBRIDO: QR O ESCANEO DE PÁGINA */
-const params = new URLSearchParams(window.location.search);
-const escenaQR = params.get("escena");
-const modoAR = params.get("ar") === "1";
-
-const escenasValidas = ["portada", "respira", "tunel", "final"];
-
-if (escenaQR && escenasValidas.includes(escenaQR)) {
-  escenaEntradaQR = escenaQR;
+$("btnEntrarPortada").addEventListener("click", () => {
   $("pantallaInicio").style.display = "none";
-  cargarEscena(escenaQR);
 
-} else if (modoAR) {
-  escenaEntradaQR = "scan";
-  $("pantallaInicio").style.display = "none";
-  setTexto(
-    "Escanea una página",
-    "Apunta la cámara a una página del libro",
-    "Cuando Timo reconozca la imagen, la escena aparecerá."
-  );
+  const arScene = document.querySelector("a-scene");
+  if (arScene) {
+    arScene.style.display = "none";
+  }
 
-} else {
+  app.style.display = "block";
+  escenaEntradaQR = null;
   cargarEscena("portada");
-}
+});
 
 /* CONEXIÓN CON MINDAR */
 window.addEventListener("DOMContentLoaded", () => {
@@ -730,14 +716,21 @@ window.addEventListener("DOMContentLoaded", () => {
 
   targets.forEach((target, index) => {
     target.addEventListener("targetFound", () => {
-      const escenaPorTarget = ["portada", "respira", "tunel", "final"];
-      const escenaDetectada = escenaPorTarget[index];
+  const escenaPorTarget = ["portada", "respira", "tunel", "final"];
+  const escenaDetectada = escenaPorTarget[index];
 
-      if (!escenaDetectada) return;
+  if (!escenaDetectada) return;
 
-      escenaEntradaQR = "scan";
-      cargarEscena(escenaDetectada);
-    });
+  escenaEntradaQR = "scan";
+
+  const arScene = document.querySelector("a-scene");
+  if (arScene) {
+    arScene.style.display = "none";
+  }
+
+  app.style.display = "block";
+  cargarEscena(escenaDetectada);
+});
 
     target.addEventListener("targetLost", () => {
       setTexto(
