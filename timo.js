@@ -700,8 +700,14 @@ btnSensible.addEventListener("click", e => { e.stopPropagation(); modoSensible=!
 $("btnEntrarPortada").addEventListener("click", () => {
   $("pantallaInicio").style.display = "none";
 
-  const arScene = document.querySelector("a-scene");
-  if (arScene) arScene.style.display = "none";
+const arScene = document.querySelector("a-scene");
+
+if (arScene) {
+  arScene.style.display = "none";
+  arScene.style.visibility = "hidden";
+  arScene.style.opacity = "0";
+  arScene.pause();
+}
 
   app.style.display = "block";
   escenaEntradaQR = null;

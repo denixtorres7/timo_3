@@ -94,3 +94,11 @@ body.escena-activa a-scene {
 body.escena-activa #app {
   display: block !important;
 }
+
+body.escena-activa a-scene,
+body.escena-activa video,
+body.escena-activa canvas {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
