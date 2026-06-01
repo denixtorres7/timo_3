@@ -701,41 +701,129 @@ $("btnEntrarPortada").addEventListener("click", () => {
   $("pantallaInicio").style.display = "none";
 
   const arScene = document.querySelector("a-scene");
-if (arScene) {
-  arScene.style.display = "none";
+  if (arScene) arScene.style.display = "none";
+
+  app.style.display = "block";
+  escenaEntradaQR = null;
+
+  cargarEscena("portada");
+});
+
+
+/* ==========================
+   INICIO QR / MINDAR
+========================== */
+
+const params = new URLSearchParams(window.location.search);
+const escenaQR = params.get("escena");
+const modoAR = params.get("ar") === "1";
+
+const escenasValidas = [
+  "portada",
+  "respira",
+  "tunel",
+  "final"
+];
+
+if (escenaQR && escenasValidas.includes(escenaQR)) {
+
+  escenaEntradaQR = escenaQR;
+
+  $("pantallaInicio").style.display = "none";
+
+  const arScene = document.querySelector("a-scene");
+  if (arScene) arScene.style.display = "none";
+
+  app.style.display = "block";
+
+  cargarEscena(escenaQR);
+
 }
-
-app.style.display = "block";
-cargarEscena(escenaDetectada);
-
-/* CONEXIÓN CON MINDAR */
-window.addEventListener("DOMContentLoaded", () => {
-  const targets = document.querySelectorAll("[mindar-image-target]");
-
-  targets.forEach((target, index) => {
-    target.addEventListener("targetFound", () => {
-  const escenaPorTarget = ["portada", "respira", "tunel", "final"];
-  const escenaDetectada = escenaPorTarget[index];
-
-  if (!escenaDetectada) return;
+else if (modoAR) {
 
   escenaEntradaQR = "scan";
 
+  document.body.classList.add("modo-scan");
+
+  $("pantallaInicio").style.display = "none";
+
+  app.style.display = "none";
+
+}
+else {
+
   const arScene = document.querySelector("a-scene");
+
   if (arScene) {
     arScene.style.display = "none";
   }
 
   app.style.display = "block";
-  cargarEscena(escenaDetectada);
-});
+
+  cargarEscena("portada");
+
+}
+
+
+/* ==========================
+   CONEXIÓN MINDAR
+========================== */
+
+window.addEventListener("DOMContentLoaded", () => {
+
+  const targets =
+    document.querySelectorAll("[mindar-image-target]");
+
+  const escenaPorTarget = [
+    "portada",
+    "respira",
+    "tunel",
+    "final"
+  ];
+
+  targets.forEach((target, index) => {
+
+    target.addEventListener("targetFound", () => {
+
+      const escenaDetectada =
+        escenaPorTarget[index];
+
+      if (!escenaDetectada) return;
+
+      escenaEntradaQR = "scan";
+
+      document.body.classList.remove("modo-scan");
+      document.body.classList.add("escena-activa");
+
+      const arScene =
+        document.querySelector("a-scene");
+
+      if (arScene) {
+        arScene.style.display = "none";
+      }
+
+      app.style.display = "block";
+
+      cargarEscena(escenaDetectada);
+
+    });
 
     target.addEventListener("targetLost", () => {
+
+      if (
+        document.body.classList.contains(
+          "escena-activa"
+        )
+      ) return;
+
       setTexto(
         "Página no visible",
         "Vuelve a enfocar la página",
         "Timo espera a que la imagen vuelva a aparecer."
       );
+
     });
+
   });
+
 });
