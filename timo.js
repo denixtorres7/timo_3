@@ -232,31 +232,29 @@ function tocarPortada(){
   vibrar([35,20,45]);
   flashRapido();
 
-timo.classList.remove(
-  "temblar",
-  "volver",
-  "enrollarTimo",
-  "rodarFuera",
-  "oculto"
-);
-
+  timo.className = "personaje";
   timo.src = ASSETS.portada.bolita;
-
   timo.style.left = "18%";
   timo.style.top = "74%";
   timo.style.width = "clamp(90px,13vw,160px)";
   timo.style.opacity = "1";
   timo.style.display = "block";
   timo.style.transform = "translate(-50%,-50%) rotate(0deg)";
+  timo.style.transition = "none";
 
-  void timo.offsetWidth;
+  luciernagasDibujo.style.left = "18%";
+  luciernagasDibujo.style.top = "56%";
+  spotLuz.style.left = "18%";
+  spotLuz.style.top = "72%";
 
-  timo.classList.add("rodarFuera");
+  setTimeout(() => {
+    timo.style.transition = "left 1.25s ease-in, transform 1.25s ease-in";
+    timo.style.left = "115%";
+    timo.style.transform = "translate(-50%,-50%) rotate(760deg)";
 
-  console.log("Timo sale", timo.style.left, timo.style.top);
-
-  luciernagasDibujo.style.left = "110%";
-  spotLuz.style.left = "110%";
+    luciernagasDibujo.style.left = "110%";
+    spotLuz.style.left = "110%";
+  }, 50);
 
   setTexto(
     "¡Uy!",
@@ -268,6 +266,7 @@ timo.classList.remove(
   setVol("stressNoise", .32);
   setVol("rollingBall", .32);
 }
+
 function regularPortada(delta){
   progresoPortada = Math.max(0, Math.min(1, progresoPortada + delta/1500));
   const p = progresoPortada;
