@@ -697,6 +697,31 @@ document.querySelectorAll("#menu [data-scene]").forEach(btn => btn.addEventListe
 btnSonido.addEventListener("click", e => { e.stopPropagation(); sonidoActivo ? apagarSonido() : encenderSonido(); });
 btnSensible.addEventListener("click", e => { e.stopPropagation(); modoSensible=!modoSensible; app.classList.toggle("modoSensible",modoSensible); btnSensible.classList.toggle("activo",modoSensible); actualizarAudioPorEscena(); });
 
+const btnEscanear = $("btnEscanear");
+
+if (btnEscanear) {
+  btnEscanear.addEventListener("click", e => {
+    e.stopPropagation();
+
+    document.body.classList.remove("escena-activa");
+    document.body.classList.add("modo-scan");
+
+    app.style.display = "none";
+
+    const arScene = document.querySelector("a-scene");
+
+    if (arScene) {
+      arScene.style.display = "block";
+      arScene.style.visibility = "visible";
+      arScene.style.opacity = "1";
+
+      if (typeof arScene.play === "function") {
+        arScene.play();
+      }
+    }
+  });
+}
+
 $("btnEntrarPortada").addEventListener("click", () => {
   $("pantallaInicio").style.display = "none";
 
@@ -799,18 +824,22 @@ window.addEventListener("DOMContentLoaded", () => {
       escenaEntradaQR = "scan";
 
       document.body.classList.remove("modo-scan");
-      document.body.classList.add("escena-activa");
+document.body.classList.add("escena-activa");
 
-      const arScene =
-        document.querySelector("a-scene");
+const arScene = document.querySelector("a-scene");
 
-      if (arScene) {
-        arScene.style.display = "none";
-      }
+if (arScene) {
+  arScene.style.display = "none";
+  arScene.style.visibility = "hidden";
+  arScene.style.opacity = "0";
 
-      app.style.display = "block";
+  if (typeof arScene.pause === "function") {
+    arScene.pause();
+  }
+}
 
-      cargarEscena(escenaDetectada);
+app.style.display = "block";
+cargarEscena(escenaDetectada);
 
     });
 

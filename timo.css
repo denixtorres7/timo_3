@@ -76,23 +76,13 @@ body.modo-scan #app {
   display: none !important;
 }
 
-body.modo-scan #pantallaInicio {
-  display: none !important;
-}
-
 body.modo-scan a-scene {
   display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   position: fixed !important;
   inset: 0 !important;
   z-index: 9999 !important;
-}
-
-body.escena-activa a-scene {
-  display: none !important;
-}
-
-body.escena-activa #app {
-  display: block !important;
 }
 
 body.escena-activa a-scene,
@@ -101,4 +91,8 @@ body.escena-activa canvas {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
+}
+
+body.escena-activa #app {
+  display: block !important;
 }
