@@ -762,7 +762,6 @@ if (arScene) {
   arScene.style.display = "none";
   arScene.style.visibility = "hidden";
   arScene.style.opacity = "0";
-  arScene.pause();
 }
 
   app.style.display = "block";
@@ -824,15 +823,13 @@ else {
 
 }
 
-
 /* ==========================
    CONEXIÓN MINDAR
 ========================== */
 
 window.addEventListener("DOMContentLoaded", () => {
 
-  const targets =
-    document.querySelectorAll("[mindar-image-target]");
+  const targets = document.querySelectorAll("[mindar-image-target]");
 
   const escenaPorTarget = [
     "portada",
@@ -845,8 +842,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     target.addEventListener("targetFound", () => {
 
-      const escenaDetectada =
-        escenaPorTarget[index];
+      const escenaDetectada = escenaPorTarget[index];
 
       if (!escenaDetectada) return;
 
@@ -855,27 +851,23 @@ window.addEventListener("DOMContentLoaded", () => {
       document.body.classList.remove("modo-scan");
       document.body.classList.add("escena-activa");
 
-const arScene = document.querySelector("a-scene");
+      const arScene = document.querySelector("a-scene");
 
-if (arScene) {
-  arScene.style.display = "none";
-  arScene.style.visibility = "hidden";
-  arScene.style.opacity = "0";
-  }
-}
+      if (arScene) {
+        arScene.style.display = "none";
+        arScene.style.visibility = "hidden";
+        arScene.style.opacity = "0";
+      }
 
-app.style.display = "block";
-cargarEscena(escenaDetectada);
+      app.style.display = "block";
+
+      cargarEscena(escenaDetectada);
 
     });
 
     target.addEventListener("targetLost", () => {
 
-      if (
-        document.body.classList.contains(
-          "escena-activa"
-        )
-      ) return;
+      if (document.body.classList.contains("escena-activa")) return;
 
       setTexto(
         "Página no visible",
