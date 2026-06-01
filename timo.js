@@ -252,8 +252,8 @@ function tocarPortada(){
     timo.style.left = "115%";
     timo.style.transform = "translate(-50%,-50%) rotate(760deg)";
 
-    luciernagasDibujo.style.left = "110%";
-    spotLuz.style.left = "110%";
+    luciernagasDibujo.style.left = "60%";
+    spotLuz.style.left = "45%";
   }, 50);
 
   setTexto(
@@ -275,7 +275,7 @@ function regularPortada(delta){
   intensidadLuciernagas(.20 + p*.35);
   spotLuz.style.left = `${18 + p*18}%`; spotLuz.style.top = `${72 + p*2}%`; spotLuz.style.transform = `translate(-50%,-50%) scale(${1+p*.9})`;
   luciernagasDibujo.style.left = `${18 + p*18}%`; luciernagasDibujo.style.top = `${56 - p*3}%`; luciernagasDibujo.style.width = `clamp(22px,${4 + p*1.2}vw,56px)`;
-  if(p > .42 && p < .95){
+    if(p > .02 && p < .95){
     const regreso = (p-.42)/(.95-.42);
     const x = 115 - regreso*81;
     const y = 74 + regreso*6;
