@@ -232,7 +232,14 @@ function tocarPortada(){
   vibrar([35,20,45]);
   flashRapido();
 
-  timo.classList.remove("temblar","volver","enrollarTimo","oculto");
+timo.classList.remove(
+  "temblar",
+  "volver",
+  "enrollarTimo",
+  "rodarFuera",
+  "oculto"
+);
+
   timo.src = ASSETS.portada.bolita;
 
   timo.style.left = "18%";
@@ -245,6 +252,8 @@ function tocarPortada(){
   void timo.offsetWidth;
 
   timo.classList.add("rodarFuera");
+
+  console.log("Timo sale", timo.style.left, timo.style.top);
 
   luciernagasDibujo.style.left = "110%";
   spotLuz.style.left = "110%";
