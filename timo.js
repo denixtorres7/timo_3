@@ -224,13 +224,40 @@ function escenaPortada(){
 }
 function tocarPortada(){
   if(estadoPortada !== "oscuro") return;
+
   estadoPortada = "regular";
+
   if(!sonidoActivo) encenderSonido();
-  vibrar([35,20,45]); flashRapido();
-  timo.classList.remove("temblar"); timo.classList.add("rodarFuera");
-  luciernagasDibujo.style.left = "110%"; spotLuz.style.left = "110%";
-  setTexto("¡Uy!", "Desliza suavemente tu dedo para que Timo vuelva", "Timo se hizo bolita para protegerse. Necesita que el mundo baje su intensidad.");
-  setVol("heartbeatFast", .38); setVol("stressNoise", .32); setVol("rollingBall", .32);
+
+  vibrar([35,20,45]);
+  flashRapido();
+
+  timo.classList.remove("temblar","volver","enrollarTimo","oculto");
+  timo.src = ASSETS.portada.bolita;
+
+  timo.style.left = "18%";
+  timo.style.top = "74%";
+  timo.style.width = "clamp(90px,13vw,160px)";
+  timo.style.opacity = "1";
+  timo.style.display = "block";
+  timo.style.transform = "translate(-50%,-50%) rotate(0deg)";
+
+  void timo.offsetWidth;
+
+  timo.classList.add("rodarFuera");
+
+  luciernagasDibujo.style.left = "110%";
+  spotLuz.style.left = "110%";
+
+  setTexto(
+    "¡Uy!",
+    "Desliza suavemente tu dedo para que Timo vuelva",
+    "Timo se hizo bolita para protegerse. Necesita que el mundo baje su intensidad."
+  );
+
+  setVol("heartbeatFast", .38);
+  setVol("stressNoise", .32);
+  setVol("rollingBall", .32);
 }
 function regularPortada(delta){
   progresoPortada = Math.max(0, Math.min(1, progresoPortada + delta/1500));
