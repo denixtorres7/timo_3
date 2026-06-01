@@ -701,14 +701,12 @@ $("btnEntrarPortada").addEventListener("click", () => {
   $("pantallaInicio").style.display = "none";
 
   const arScene = document.querySelector("a-scene");
-  if (arScene) {
-    arScene.style.display = "none";
-  }
+if (arScene) {
+  arScene.style.display = "none";
+}
 
-  app.style.display = "block";
-  escenaEntradaQR = null;
-  cargarEscena("portada");
-});
+app.style.display = "block";
+cargarEscena(escenaDetectada);
 
 /* CONEXIÓN CON MINDAR */
 window.addEventListener("DOMContentLoaded", () => {
