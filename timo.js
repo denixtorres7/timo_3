@@ -473,110 +473,84 @@ function actualizarTimoTunel(){
 
 function avanzarTimoTunelPorTap(){
 
- if(
-   escenaActual!=="tunel"
- ) return;
+  if(escenaActual !== "tunel") return;
+  if(pelotaLibre) return;
 
- if(
-   pelotaLibre
- ) return;
+  // FASE 0: Timo entra al túnel desde la derecha.
+  if(!pelotaEncontrada && tunelX > .74){
 
+    tunelX -= .16;
 
- // FASE 1:
- // recorrer túnel
+    actualizarTimoTunel();
 
+    setTexto(
+      "Timo entra",
+      "Toca otra vez",
+      "Timo se hace bolita para acercarse con cuidado."
+    );
 
- if(!pelotaEncontrada){
+    return;
+  }
 
-   const dx=
-   pelotaTunelX-tunelX;
+  // FASE 1: Timo avanza hasta encontrar la pelota.
+  if(!pelotaEncontrada){
 
-   const dy=
-   pelotaTunelY-tunelY;
+    const dx = pelotaTunelX - tunelX;
+    const dy = pelotaTunelY - tunelY;
 
-   const distancia=
-   Math.sqrt(
-    dx*dx+dy*dy
-   );
+    const distancia = Math.sqrt(dx*dx + dy*dy);
 
+    if(distancia > .10){
 
-   if(
-      distancia>.10
-   ){
-
-      tunelX+=dx*.18;
-
-      tunelY+=dy*.18;
+      tunelX += dx*.18;
+      tunelY += dy*.18;
 
       actualizarTimoTunel();
 
       return;
+    }
 
-   }
+    pelotaEncontrada = true;
 
+    playOneShot("ballTap", .58);
 
-   pelotaEncontrada=true;
-
-   playOneShot(
-      "ballTap",
-      .58
-   );
-
-   setTexto(
+    setTexto(
       "La encontró",
       "Toca otra vez",
-      "Ahora Timo buscará cómo ayudarla."
-   );
+      "Ahora Timo se pondrá detrás para empujarla por donde entró."
+    );
 
-   return;
+    return;
+  }
 
- }
+  // FASE 2: Timo se acomoda detrás de la pelota, del lado izquierdo,
+  // para empujarla hacia la derecha.
+  if(!timoListoParaEmpujar){
 
+    const objetivoX = pelotaTunelX - .14;
 
- // FASE 2
- // acomodarse detrás
-
-
- if(
-    !timoListoParaEmpujar
- ){
-
-    const objetivoX=
-    pelotaTunelX+.14;
-
-    tunelX+=
-    (objetivoX-tunelX)
-    *.45;
-
-    tunelY+=
-    (pelotaTunelY-tunelY)
-    *.45;
+    tunelX += (objetivoX - tunelX) * .45;
+    tunelY += (pelotaTunelY - tunelY) * .45;
 
     actualizarTimoTunel();
 
-    if(
-      Math.abs(
-      tunelX-objetivoX
-      )<.03
-    ){
+    if(Math.abs(tunelX - objetivoX) < .03){
 
-      timoListoParaEmpujar=
-      true;
+      timoListoParaEmpujar = true;
 
       setTexto(
         "Listo",
         "Toca para empujar",
-        "Timo encontró otra forma."
+        "Timo encontró la forma de sacarla por el mismo camino."
       );
-
     }
 
     return;
+  }
 
- }
-
-
- empujarPelotaTunel();
+  // FASE 3: Empujar la pelota hacia la derecha,
+  // que es por donde entró.
+  empujarPelotaTunel();
 
 }
 
