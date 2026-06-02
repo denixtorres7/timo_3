@@ -754,12 +754,19 @@ pelota.addEventListener("click", e => {
   lanzarPelota();
 });
 
-pelota.addEventListener("touchstart", e => {
+function tocarPelotaFinal(e){
   e.stopPropagation();
-  e.preventDefault();
+  if(e.cancelable) e.preventDefault();
+
   if(!sonidoActivo) encenderSonido();
+
   lanzarPelota();
-}, { passive:true });
+}
+
+pelota.addEventListener("touchstart", tocarPelotaFinal, { passive:false });
+pelota.addEventListener("click", tocarPelotaFinal);
+pelota.addEventListener("pointerdown", tocarPelotaFinal);
+
 
 document.querySelectorAll("#menu [data-scene]").forEach(btn => btn.addEventListener("click", e => { e.stopPropagation(); if(!sonidoActivo) encenderSonido(); cargarEscena(btn.dataset.scene); }));
 btnSonido.addEventListener("click", e => { e.stopPropagation(); sonidoActivo ? apagarSonido() : encenderSonido(); });
