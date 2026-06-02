@@ -655,7 +655,7 @@ function empujarPelotaTunel(){
 
  // vuelve por donde entró
 
- pelotaTunelX+=.10;
+ pelotaTunelX+=.07;
 
  pelotaTunelY+=
  (tunelY-pelotaTunelY)
