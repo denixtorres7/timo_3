@@ -403,65 +403,12 @@ function moverRespira(paso=1){
   audioRespira();
 }
 
-function escenaTunel(){
-
-  fondo.src=ASSETS.tunel.fondo;
-
-  clima({
-    os:.34,
-    ruidoOp:.16,
-    brillo:.75,
-    sat:.82,
-    contraste:1.12,
-    color:"#de7d4f",
-    colorOp:.20
-  });
-
-  crearLuciernagas(
-    6,
-    {x:62,y:64,radio:8}
-  );
-
-  mostrar(
-    luciernagasDibujo,
-    ASSETS.portada.luciernagas,
-    "69%",
-    "62%",
-    "clamp(28px,5vw,70px)"
-  );
-
-  mostrar(
-    timo,
-    ASSETS.tunel.bolita,
-    "69%",
-    "66%",
-    "clamp(70px,10vw,130px)"
-  );
-
-  mostrar(
-    pelota,
-    ASSETS.tunel.pelota,
-    "52%",
-    "66%",
-    "clamp(45px,7vw,90px)"
-  );
-
-  pelota.classList.add("flotar");
-
-  spotLuz.style.left="69%";
-  spotLuz.style.top="66%";
-
-  setTexto(
-    "El túnel",
-    "Toca para recorrer el túnel",
-    "Cuando encuentre la pelota, Timo buscará una forma de sacarla."
-  );
-
-  pelotaEncontrada=false;
-  timoListoParaEmpujar=false;
-
-  actualizarTimoTunel();
-
+body.escena-activa .mindar-ui-overlay,
+body.escena-activa .mindar-ui-scanning,
+body.escena-activa .mindar-ui-loading{
+  display:none !important;
+  opacity:0 !important;
+  visibility:hidden !important;
 }
 
 
