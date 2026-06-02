@@ -299,7 +299,7 @@ function regularPortada(delta){
   timo.style.width = "clamp(90px,13vw,160px)";
   timo.style.opacity = "1";
   timo.style.transition =
-    "width 2.8s ease-in-out, transform 2.8s ease-in-out, opacity 1.2s ease";
+    "width 4.8s ease-in-out, transform 4.8s ease-in-out, opacity 2s ease";
 
   timo.style.transform = "translate(-50%,-50%) rotate(0deg) scale(1)";
 
@@ -307,7 +307,7 @@ function regularPortada(delta){
     timo.src = ASSETS.portada.abierto;
     timo.style.width = "clamp(155px,22vw,280px)";
     timo.style.transform = "translate(-50%,-50%) rotate(0deg) scale(1)";
-  }, 600);
+  }, 1800);
 
   setTimeout(() => {
     timoAbierto = true;
@@ -318,7 +318,7 @@ function regularPortada(delta){
       "Gracias por esperar",
       "Cuando el mundo bajó su intensidad, Timo pudo volver a mirar."
     );
-  }, 3200);
+  }, 5600);
 }
 function reenrollarTimo(){
   if(escenaActual !== "portada") return;
