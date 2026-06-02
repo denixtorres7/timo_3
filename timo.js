@@ -290,13 +290,35 @@ function regularPortada(delta){
     timo.style.transform = `translate(-50%,-50%) rotate(${rot}deg)`;
   }
   if(p > .95 && estadoPortada !== "calma"){
+  estadoPortada = "abriendo";
+
+  timo.classList.remove("volver","temblar","rodarFuera");
+  timo.src = ASSETS.portada.bolita;
+  timo.style.left = "34%";
+  timo.style.top = "80%";
+  timo.style.width = "clamp(90px,13vw,160px)";
+  timo.style.opacity = "1";
+  timo.style.transition =
+    "width 2.8s ease-in-out, transform 2.8s ease-in-out, opacity 1.2s ease";
+
+  timo.style.transform = "translate(-50%,-50%) rotate(0deg) scale(1)";
+
+  setTimeout(() => {
+    timo.src = ASSETS.portada.abierto;
+    timo.style.width = "clamp(155px,22vw,280px)";
+    timo.style.transform = "translate(-50%,-50%) rotate(0deg) scale(1)";
+  }, 600);
+
+  setTimeout(() => {
     timoAbierto = true;
-    timo.classList.remove("volver","temblar","rodarFuera");
-    mostrar(timo, ASSETS.portada.abierto, "34%", "80%", "clamp(155px,22vw,280px)");
-    setTexto("", "Gracias por esperar", "Cuando el mundo bajó su intensidad, Timo pudo volver a mirar.");
     estadoPortada = "calma";
-  }
-  audioPortada();
+
+    setTexto(
+      "",
+      "Gracias por esperar",
+      "Cuando el mundo bajó su intensidad, Timo pudo volver a mirar."
+    );
+  }, 3200);
 }
 function reenrollarTimo(){
   if(escenaActual !== "portada") return;
