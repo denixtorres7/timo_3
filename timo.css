@@ -135,3 +135,10 @@ body.modo-scan #ayEco {
   display: none !important;
 }
 
+body.escena-activa .mindar-ui-overlay,
+body.escena-activa .mindar-ui-scanning,
+body.escena-activa .mindar-ui-loading{
+  display:none !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+}
