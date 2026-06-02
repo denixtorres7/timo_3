@@ -115,3 +115,11 @@ body.escena-activa canvas {
 body.escena-activa #app {
   display: block !important;
 }
+
+body.modo-scan #app,
+body.modo-scan #pantallaInicio,
+body.modo-scan #menu,
+body.modo-scan #avisoAudio,
+body.modo-scan #ayEco {
+  display: none !important;
+}
