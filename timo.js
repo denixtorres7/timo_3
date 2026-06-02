@@ -324,6 +324,7 @@ function regularPortada(delta){
     timo.style.width = "clamp(155px,22vw,280px)";
     timo.style.opacity = "1";
     timo.style.display = "block";
+    timo.style.transition = "all 1.6s ease-in-out";
     timo.style.transform = "translate(-50%,-50%)";
 
     setTexto(
@@ -337,7 +338,7 @@ function regularPortada(delta){
 }
 
 function reenrollarTimo(){
-  
+
   if(escenaActual !== "portada") return;
   timoAbierto = false;
   estadoPortada = "regular";
