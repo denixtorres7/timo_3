@@ -688,15 +688,19 @@ window.addEventListener("keydown", e => {
   if(escenaActual === "tunel"){ if(e.key === "ArrowRight" || e.key.toLowerCase()==="d") moverTunelDesktop(.035,0); if(e.key === "ArrowLeft" || e.key.toLowerCase()==="a") moverTunelDesktop(-.035,0); if(e.key === "ArrowUp" || e.key.toLowerCase()==="w") moverTunelDesktop(0,-.025); if(e.key === "ArrowDown" || e.key.toLowerCase()==="s") moverTunelDesktop(0,.025); }
 });
 pelota.addEventListener("click", e => {
-  e.stopPropagation();
-  if(!sonidoActivo) encenderSonido();
-  lanzarPelota();
+  if(escenaActual === "final"){
+    e.stopPropagation();
+    if(!sonidoActivo) encenderSonido();
+    lanzarPelota();
+  }
 });
 
 pelota.addEventListener("pointerdown", e => {
-  e.stopPropagation();
-  if(!sonidoActivo) encenderSonido();
-  lanzarPelota();
+  if(escenaActual === "final"){
+    e.stopPropagation();
+    if(!sonidoActivo) encenderSonido();
+    lanzarPelota();
+  }
 });
 
 
