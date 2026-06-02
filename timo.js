@@ -270,59 +270,71 @@ function tocarPortada(){
 function regularPortada(delta){
   progresoPortada = Math.max(0, Math.min(1, progresoPortada + delta/1500));
   const p = progresoPortada;
-  [conejo,pajaro,mariposa,pelota].forEach(el => { el.style.opacity = .12 + p*.88; el.style.filter = `brightness(${.35 + p*.75}) blur(${1-p}px)`; if(p>.35) el.classList.add("flotar"); });
-  clima({os:.94-p*.86, ruidoOp:.32-p*.30, brillo:.42+p*.68, sat:.62+p*.35, contraste:1.15-p*.1, color:"#ffb36b", colorOp:.08+p*.18});
+
+  [conejo,pajaro,mariposa,pelota].forEach(el => {
+    el.style.opacity = .12 + p*.88;
+    el.style.filter = `brightness(${.35 + p*.75}) blur(${1-p}px)`;
+    if(p>.35) el.classList.add("flotar");
+  });
+
+  clima({
+    os:.94-p*.86,
+    ruidoOp:.32-p*.30,
+    brillo:.42+p*.68,
+    sat:.62+p*.35,
+    contraste:1.15-p*.1,
+    color:"#ffb36b",
+    colorOp:.08+p*.18
+  });
+
   intensidadLuciernagas(.20 + p*.35);
-  spotLuz.style.left = `${18 + p*18}%`; spotLuz.style.top = `${72 + p*2}%`; spotLuz.style.transform = `translate(-50%,-50%) scale(${1+p*.9})`;
-  luciernagasDibujo.style.left = `${18 + p*18}%`; luciernagasDibujo.style.top = `${56 - p*3}%`; luciernagasDibujo.style.width = `clamp(22px,${4 + p*1.2}vw,56px)`;
-    if(p > .02 && p < .95){
+
+  spotLuz.style.left = `${18 + p*18}%`;
+  spotLuz.style.top = `${72 + p*2}%`;
+  spotLuz.style.transform = `translate(-50%,-50%) scale(${1+p*.9})`;
+
+  luciernagasDibujo.style.left = `${18 + p*18}%`;
+  luciernagasDibujo.style.top = `${56 - p*3}%`;
+  luciernagasDibujo.style.width = `clamp(22px,${4 + p*1.2}vw,56px)`;
+
+  if(p > .02 && p < .95){
     const regreso = (p-.02)/(.95-.02);
     const x = 115 - regreso*81;
     const y = 74 + regreso*6;
     const rot = 760 - regreso*760;
-    timo.classList.remove("rodarFuera","temblar","volver");
+
+    timo.className = "personaje";
     timo.src = ASSETS.portada.bolita;
-    timo.classList.remove("oculto");
     timo.style.left = `${x}%`;
     timo.style.top = `${y}%`;
     timo.style.width = "clamp(78px,11vw,138px)";
-    timo.style.opacity = 1;
+    timo.style.opacity = "1";
+    timo.style.display = "block";
     timo.style.transform = `translate(-50%,-50%) rotate(${rot}deg)`;
   }
+
   if(p > .95 && estadoPortada !== "calma"){
-  estadoPortada = "abriendo";
-
-  timo.classList.remove("volver","temblar","rodarFuera");
-  timo.src = ASSETS.portada.bolita;
-  timo.style.left = "34%";
-  timo.style.top = "80%";
-  timo.style.width = "clamp(90px,13vw,160px)";
-  timo.style.opacity = "1";
-  timo.style.transition =
-    "width 4.8s ease-in-out, transform 4.8s ease-in-out, opacity 2s ease";
-
-  timo.style.transform = "translate(-50%,-50%) rotate(0deg) scale(1)";
-
-  setTimeout(() => {
-    timo.src = ASSETS.portada.abierto;
-    timo.style.width = "clamp(155px,22vw,280px)";
-    timo.style.transform = "translate(-50%,-50%) rotate(0deg) scale(1)";
-  }, 1800);
-
-  setTimeout(() => {
-    timoAbierto = true;
     estadoPortada = "calma";
+    timoAbierto = true;
+
+    timo.className = "personaje";
+    timo.src = ASSETS.portada.abierto;
+    timo.style.left = "34%";
+    timo.style.top = "80%";
+    timo.style.width = "clamp(155px,22vw,280px)";
+    timo.style.opacity = "1";
+    timo.style.display = "block";
+    timo.style.transform = "translate(-50%,-50%)";
 
     setTexto(
       "",
       "Gracias por esperar",
       "Cuando el mundo bajó su intensidad, Timo pudo volver a mirar."
     );
-  }, 5600);
+  }
 
-  }   // cierre if
-
-}     // cierre regularPortada
+  audioPortada();
+}
 
 function reenrollarTimo(){
   
