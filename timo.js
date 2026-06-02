@@ -726,8 +726,7 @@ function lanzarPelota(){
 
 function manejarTapGlobal(e){
   if(e.target.closest("#menu")) return;
-  if(e.target === pelota && escenaActual === "final") return;
-  if(!sonidoActivo) encenderSonido();
+if(escenaActual === "final" && e.target.closest("#pelota")) return;  if(!sonidoActivo) encenderSonido();
   if(escenaActual === "portada" && estadoPortada === "oscuro"){ tocarPortada(); return; }
   if(escenaActual === "portada" && estadoPortada === "calma" && e.target === timo){ reenrollarTimo(); return; }
   if(escenaActual === "tunel"){ avanzarTimoTunelPorTap(); return; }
@@ -749,7 +748,19 @@ window.addEventListener("keydown", e => {
   if(e.code === "Space") manejarTapGlobal({target:document.body, targetClosest:false});
   if(escenaActual === "tunel"){ if(e.key === "ArrowRight" || e.key.toLowerCase()==="d") moverTunelDesktop(.035,0); if(e.key === "ArrowLeft" || e.key.toLowerCase()==="a") moverTunelDesktop(-.035,0); if(e.key === "ArrowUp" || e.key.toLowerCase()==="w") moverTunelDesktop(0,-.025); if(e.key === "ArrowDown" || e.key.toLowerCase()==="s") moverTunelDesktop(0,.025); }
 });
-pelota.addEventListener("pointerdown", e => { e.stopPropagation(); if(!sonidoActivo) encenderSonido(); lanzarPelota(); });
+pelota.addEventListener("click", e => {
+  e.stopPropagation();
+  if(!sonidoActivo) encenderSonido();
+  lanzarPelota();
+});
+
+pelota.addEventListener("touchstart", e => {
+  e.stopPropagation();
+  e.preventDefault();
+  if(!sonidoActivo) encenderSonido();
+  lanzarPelota();
+}, { passive:true });
+
 document.querySelectorAll("#menu [data-scene]").forEach(btn => btn.addEventListener("click", e => { e.stopPropagation(); if(!sonidoActivo) encenderSonido(); cargarEscena(btn.dataset.scene); }));
 btnSonido.addEventListener("click", e => { e.stopPropagation(); sonidoActivo ? apagarSonido() : encenderSonido(); });
 btnSensible.addEventListener("click", e => { e.stopPropagation(); modoSensible=!modoSensible; app.classList.toggle("modoSensible",modoSensible); btnSensible.classList.toggle("activo",modoSensible); actualizarAudioPorEscena(); });

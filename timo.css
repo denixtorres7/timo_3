@@ -64,6 +64,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:Ari
 .flotar{animation:flotar 3s infinite ease-in-out}
 @keyframes flotar{0%,100%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-14px)}}
 .pelotaInteractiva{cursor:pointer;pointer-events:auto}
+#pelota{
+  pointer-events:auto !important;
+  touch-action:manipulation;
+  z-index:50 !important;
+}
 .saltarPelota{animation:saltarPelota .85s ease-out}
 @keyframes saltarPelota{0%{transform:translate(-50%,-50%) translateY(0) scale(1)}35%{transform:translate(-50%,-50%) translateY(-20vh) scale(1.08)}70%{transform:translate(-50%,-50%) translateY(0) scale(.96)}100%{transform:translate(-50%,-50%) translateY(0) scale(1)}}
 .vibracionVisual{animation:sacudidaPantalla .08s 4}
