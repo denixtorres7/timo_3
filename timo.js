@@ -319,8 +319,13 @@ function regularPortada(delta){
       "Cuando el mundo bajó su intensidad, Timo pudo volver a mirar."
     );
   }, 5600);
-}
+
+  }   // cierre if
+
+}     // cierre regularPortada
+
 function reenrollarTimo(){
+  
   if(escenaActual !== "portada") return;
   timoAbierto = false;
   estadoPortada = "regular";
