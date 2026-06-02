@@ -162,7 +162,7 @@ function clima({os=.5, ruidoOp=.1, brillo=1, sat=1, contraste=1, color="transpar
 
 function actualizarBotones(){
   document.querySelectorAll("#menu [data-scene]").forEach(b => {
-    const visible = !escenaEntradaQR ? true : b.dataset.scene === escenaActual;
+    const visible = true;
     b.style.display = visible ? "" : "none";
     b.classList.toggle("activo", b.dataset.scene === escenaActual);
   });
