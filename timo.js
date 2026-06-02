@@ -178,8 +178,8 @@ function actualizarAudioPorEscena(){
 
 function audioPortada(){
   const p = progresoPortada, estres = 1-p, calma = p;
-  setVol("forest", .55*estres); setVol("heartbeatFast", .28*estres); setVol("stressLow", .35*estres); setVol("stressHigh", .18*estres); setVol("stressNoise", .25*estres); setVol("rollingBall", .25*estres); setVol("tunnelEcho", .10*estres); setVol("softChimes", .14*calma);
-  setVol("heartbeatSoft", .03 + .16*calma); setVol("calmAir", .08 + .35*calma); setVol("fireflies", .06 + .22*calma);
+  setVol("forest", .55*estres); setVol("heartbeatFast", .28*estres); setVol("stressLow", .35*estres); setVol("stressHigh", .18*estres); setVol("stressNoise", .25*estres); setVol("rollingBall", .25*estres); setVol("play_Ball", .25*estres);setVol("fireflies", .06 + .22*calma); setVol("softChimes", .14*calma);
+  setVol("heartbeatSoft", .03 + .16*calma); setVol("calmAir", .08 + .35*calma); setVol("correr", .08 + .35*calma); 
 }
 function audioRespira(){
   const calma = progresoRespira, tension = 1-calma;
